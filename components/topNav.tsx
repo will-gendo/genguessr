@@ -10,7 +10,7 @@ const TopBar: React.FC<TopBarProps> = (props: TopBarProps) => {
 
   return (
     <div className="flex flex-col w-full px-6">
-      <div className="flex w-full h-24 justify-center">
+      <div className="flex w-full h-fit justify-center py-4">
         <div className="flex flex-1">
           {gameId && (
             <div className="mr-auto my-auto text-sm text-gray-400">
@@ -20,7 +20,7 @@ const TopBar: React.FC<TopBarProps> = (props: TopBarProps) => {
         </div>
         <div className="flex flex-auto">
           <Link
-            className="m-auto pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
+            className="m-auto pointer-events-none flex place-items-center gap-2 lg:pointer-events-auto"
             href="/"
           >
             <div className="mt-auto text-sm hidden sm:block">GenGuessr By</div>

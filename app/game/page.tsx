@@ -76,83 +76,87 @@ export default function Game() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-[#232323] text-white">
-      <TopBar gameId={gameId} />
-      <div className="flex flex-col text-center lg:max-w-5xl lg:w-full gap-y-12 mt-6 lg:mt-10 2xl:mt-20">
-        <div className="flex mx-auto text-sm uppercase gap-4">
-          <div className="my-auto">You are the</div>
-          <div className="border border-white rounded py-2 px-4">{role}</div>
-        </div>
-        <div className="mx-auto">
+    <main className="min-h-screen bg-[#232323] text-white">
+      <div className="flex h-screen flex-col items-center">
+        <TopBar gameId={gameId} />
+        <div className="flex flex-1 flex-col h-full w-full">
+          <div className="flex flex-none h-fit mx-auto text-sm uppercase gap-4 p-8">
+            <div className="my-auto">You are the</div>
+            <div className="border border-white rounded py-2 px-4">{role}</div>
+          </div>
           {error && (
-            <>
+            <div className="flex flex-none h-fit mx-auto uppercase">
               <div className="mb-4 text-red-400 uppercase">{error}</div>
-            </>
-          )}
-
-          {imageResult && (
-            <>
-              {imageResult.image_url ? (
-                <Image
-                  src={imageResult.image_url}
-                  alt="Generated image"
-                  width={500}
-                  height={24}
-                  priority
-                />
-              ) : (
-                <div className="flex border border-white rounded w-[500px] h-[500px] border-opacity-60">
-                  <div className="m-auto text-gray-400">
-                    {imageResult.status.toUpperCase()}
-                    <BarLoader color={"#ffffff"} loading={true} />
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-
-          {!imageResult && (
-            <div className="flex border border-white rounded w-[500px] h-[500px] border-opacity-50">
-              <div className="m-auto text-gray-400">
-                Choose your prompt and generate!
-              </div>
             </div>
           )}
+          <div className="flex flex-1 w-full mx-auto">
+            <div className="flex mx-auto border border-white rounded border-opacity-50 aspect-square">
+              {imageResult && (
+                <>
+                  {imageResult.image_url ? (
+                    <div className="relative w-full">
+                      <Image
+                        src={imageResult.image_url}
+                        alt="Generated image"
+                        priority
+                        fill
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex flex-col m-auto text-gray-400 p-4 gap-1">
+                      <div className="mx-auto">
+                        {imageResult.status.toUpperCase()}
+                      </div>
+                      <div>
+                        <BarLoader color={"#ffffff"} loading={true} />
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {!imageResult && (
+                <div className="m-auto text-gray-400 p-4">
+                  Choose your prompt and generate!
+                </div>
+              )}
+            </div>
+          </div>
+          <form
+            className="flex flex-none flex-row text-sm uppercase mx-auto h-fit p-8"
+            onSubmit={handleSubmit}
+          >
+            <div className="my-auto">A photo of a</div>
+            <div className="my-auto">
+              <SelectBlock
+                items={subjectOptions}
+                label="Subject"
+                onChange={setSubject}
+              />
+            </div>
+            <div className="my-auto">in</div>
+            <div className="my-auto">
+              <SelectBlock
+                items={locationOptions}
+                label="Location"
+                onChange={setLocation}
+              />
+            </div>
+            <div>
+              <button
+                className="bg-white border border-white text-black h-full px-6 text-sm rounded hover:bg-opacity-0 hover:text-white disabled:opacity-10 disabled:hover:bg-white disabled:hover:text-black"
+                type="submit"
+                disabled={
+                  imageResult != null &&
+                  (imageResult.status == "processing" ||
+                    imageResult.status == "waiting")
+                }
+              >
+                Generate
+              </button>
+            </div>
+          </form>
         </div>
-        <form
-          className="flex flex-row text-sm uppercase mx-auto"
-          onSubmit={handleSubmit}
-        >
-          <div className="my-auto">A photo of a</div>
-          <div>
-            <SelectBlock
-              items={subjectOptions}
-              label="Subject"
-              onChange={setSubject}
-            />
-          </div>
-          <div className="my-auto">in</div>
-          <div>
-            <SelectBlock
-              items={locationOptions}
-              label="Location"
-              onChange={setLocation}
-            />
-          </div>
-          <div>
-            <button
-              className="bg-white border border-white text-black h-full px-6 text-sm rounded hover:bg-opacity-0 hover:text-white disabled:opacity-10 disabled:hover:bg-white disabled:hover:text-black"
-              type="submit"
-              disabled={
-                imageResult != null &&
-                (imageResult.status == "processing" ||
-                  imageResult.status == "waiting")
-              }
-            >
-              Generate
-            </button>
-          </div>
-        </form>
       </div>
     </main>
   );
