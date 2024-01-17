@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 
+from api.routers import game, images
+
 app = FastAPI()
 
-@app.get("/api/python")
-def hello_world():
-    return {"message": "Hello World"}
+app.include_router(images.router)
+app.include_router(game.router)
