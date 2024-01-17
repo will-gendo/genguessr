@@ -18,7 +18,7 @@ const TopBar: React.FC<TopBarProps> = (props: TopBarProps) => {
             </div>
           )}
         </div>
-        <div className="flex flex-auto">
+        <div className="flex flex-auto p-4">
           <Link
             className="m-auto pointer-events-none flex place-items-center gap-2 lg:pointer-events-auto"
             href="/"
