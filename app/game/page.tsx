@@ -76,9 +76,9 @@ export default function Game() {
   };
 
   return (
-    <main className="min-h-screen bg-[#232323] text-white">
-      <div className="flex h-screen flex-col items-center">
-        <TopBar gameId={gameId} />
+    <main className="min-h-screen bg-[#232323] text-white w-[100vw]">
+      <TopBar gameId={gameId} />
+      <div className="flex flex-col items-center h-full w-full">
         <div className="flex flex-1 flex-col h-full w-full">
           <div className="flex flex-none h-fit mx-auto text-sm uppercase gap-4 p-8">
             <div className="my-auto">You are the</div>
@@ -89,8 +89,8 @@ export default function Game() {
               <div className="mb-4 text-red-400 uppercase">{error}</div>
             </div>
           )}
-          <div className="flex flex-1 w-full mx-auto">
-            <div className="flex mx-auto border border-white rounded border-opacity-50 aspect-square">
+          <div className="flex flex-1">
+            <div className="flex mx-auto border border-white rounded border-opacity-50 aspect-square w-[80vw] max-w-[50vh]">
               {imageResult && (
                 <>
                   {imageResult.image_url ? (
