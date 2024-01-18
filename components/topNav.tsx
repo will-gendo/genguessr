@@ -1,15 +1,20 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 
-type TopBarProps = {
-  gameId: string | null;
-};
+const TopBar: React.FC = () => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  let gameId = null;
 
-const TopBar: React.FC<TopBarProps> = (props: TopBarProps) => {
-  const { gameId } = props;
+  if (pathname === "/game") {
+    gameId = searchParams.get("id");
+  }
 
   return (
-    <div className="flex flex-col w-full px-6">
+    <div className="flex flex-col w-full px-6 bg-[#232323] text-white">
       <div className="flex w-full h-fit justify-center py-4">
         <div className="flex flex-1">
           {gameId && (
@@ -33,7 +38,7 @@ const TopBar: React.FC<TopBarProps> = (props: TopBarProps) => {
           {gameId && (
             <Link
               className="ml-auto my-auto"
-              href={"http://localhost:8000/game/new"}
+              href={`${process.env.NEXT_PUBLIC_API_URL}/game/new`}
             >
               <button className="border border-white border-opacity-50 h-fit py-2 px-6 text-sm rounded hover:bg-white hover:bg-opacity-90 hover:text-black">
                 <span className="inline-block text-xl">&#43;</span> New Game

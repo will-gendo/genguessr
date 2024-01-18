@@ -1,6 +1,8 @@
 # GenGuessr: Gendo Tech Task
 
-Task instructions can be found [here](https://docs.google.com/document/d/1Sv_0liAbUFcOu9dK0m4UmJfFraB4k9Od4Yt9gnvlTXc/edit?usp=sharing). 
+Task instructions can be found [here](https://docs.google.com/document/d/1Sv_0liAbUFcOu9dK0m4UmJfFraB4k9Od4Yt9gnvlTXc/edit?usp=sharing).
+
+![Screenshot of GenGuessr.](/genguessr.png)
 
 This repository was built using this [template](https://github.com/digitros/nextjs-fastapi).
 
@@ -11,6 +13,8 @@ This repository was built using this [template](https://github.com/digitros/next
 * [pnpm](https://pnpm.io/)
 
 ## Usage
+
+Create a copy of `.env.example` in the root of the project and rename it to `.env.local`.
 
 To install the required dependencies:
 
